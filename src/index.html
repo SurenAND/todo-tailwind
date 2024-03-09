@@ -24,18 +24,22 @@
             class="flex items-center bg-purple-600 p-2 px-5 gap-1 rounded-md w-full"
           >
             <img
-              class="text-center items-center justify-center mr-2"
-              name="search"
+              class="cursor-pointer text-center items-center justify-center mr-2"
+              id="search"
               src="./assets/search.svg"
               alt="search"
             />
             <input
               type="text"
-              id="search"
+              id="search-input"
               class="focus:outline-none focus:ring-0 border-none text-white rounded bg-transparent placeholder:text-gray-400 text-sm"
               placeholder="Search"
             />
           </div>
+          <!-- filter -->
+          <button id="filter" class="cursor-pointer">
+            <img src="./assets/filter.svg" alt="filter" />
+          </button>
         </div>
       </nav>
     </div>
