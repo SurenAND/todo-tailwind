@@ -626,6 +626,14 @@ video {
   border-width: 2px;
 }
 
+.border-b-2{
+  border-bottom-width: 2px;
+}
+
+.border-l-2{
+  border-left-width: 2px;
+}
+
 .border-none{
   border-style: none;
 }
@@ -657,6 +665,11 @@ video {
   padding-right: 1.25rem;
 }
 
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .pr-3{
   padding-right: 0.75rem;
 }
@@ -677,6 +690,10 @@ video {
 .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.font-bold{
+  font-weight: 700;
 }
 
 .text-white{
