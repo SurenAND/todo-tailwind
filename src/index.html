@@ -46,7 +46,9 @@
           </button>
         </div>
       </nav>
+      <!-- main section -->
       <main class="h-screen">
+        <!-- table -->
         <table class="w-full border-2 overflow-x-auto">
           <thead class="font-medium">
             <tr>
@@ -61,6 +63,78 @@
             <!-- new data will be add here -->
           </tbody>
         </table>
+
+        <!-- pagination -->
+        <div class="w-full flex justify-end p-3" id="paginate">
+          <div class="flex gap-12 items-center justify-center">
+            <!-- rows per page -->
+            <div class="flex gap-3 items-center justify-center">
+              <span>Rows per page:</span>
+              <div id="dropdown" class="min-w-4 relative">
+                <div
+                  id="select"
+                  class="w-16 p-2 font-bold text-sm flex justify-around cursor-pointer"
+                >
+                  <span id="selected">All</span>
+                  <img
+                    id="chevron-down"
+                    class="w-3"
+                    src="./assets/chevron-d.svg"
+                    alt="chevron-down"
+                  />
+                </div>
+                <ul
+                  id="menu"
+                  class="py-1 px-2 border border-solid border-purple-800 shadow-[0_0.5rem_1rem_border-purple-800] rounded-lg absolute top-10 w-24 z-10 hidden"
+                >
+                  <li
+                    class="font-bold text-sm py-1 px-2 my-1 rounded-lg text-center cursor-pointer hover:bg-purple-400 hover:text-white"
+                  >
+                    All
+                  </li>
+                  <li
+                    class="font-bold text-sm py-1 px-2 my-1 rounded-lg text-center cursor-pointer hover:bg-purple-400 hover:text-white"
+                  >
+                    5
+                  </li>
+                  <li
+                    class="font-bold text-sm py-1 px-2 my-1 rounded-lg text-center cursor-pointer hover:bg-purple-400 hover:text-white"
+                  >
+                    10
+                  </li>
+                  <li
+                    class="font-bold text-sm py-1 px-2 my-1 rounded-lg text-center cursor-pointer hover:bg-purple-400 hover:text-white"
+                  >
+                    15
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- from - to of total -->
+            <div class="text-sm">
+              <span class="font-medium">1</span>
+              -
+              <span class="font-medium">10</span>
+              of
+              <span class="font-medium">100</span>
+            </div>
+            <!-- prev and next -->
+            <div class="flex justify-center gap-5">
+              <img
+                id="prev"
+                class="cursor-pointer"
+                src="./assets/chevron-l.svg"
+                alt="chevron-l"
+              />
+              <img
+                id="next"
+                class="cursor-pointer"
+                src="./assets/chevron-r.svg"
+                alt="chevron-r"
+              />
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </body>
