@@ -136,6 +136,174 @@
           </div>
         </div>
       </main>
+      <!-- Add Modal -->
+      <div
+        id="modal-box"
+        data-close="close"
+        class="absolute inset-0 backdrop-blur-sm bg-slate-300 bg-opacity-30 flex items-center justify-center z-20 invisible"
+      >
+        <div
+          class="flex flex-col md:w-6/12 w-8/12 lg:w-4/12 bg-white relative rounded-lg"
+        >
+          <h1
+            class="text-lg text-purple-800 font-black uppercase p-3 text-center"
+          >
+            Add New Task
+          </h1>
+          <form
+            id="form"
+            class="flex flex-col gap-4 w-full p-4 border-t-2 border-purple-700"
+          >
+            <!-- task name -->
+            <div class="w-full">
+              <h5 class="mb-2">Task Name :</h5>
+              <input
+                id="task-name"
+                class="w-full border border-1 border-gray-300 rounded-md px-1 py-1 outline-1 outline-purple-700"
+                type="text"
+              />
+            </div>
+
+            <!-- priority & status -->
+            <div class="flex justify-between">
+              <!-- priority -->
+              <div class="flex flex-col w-full">
+                <h5 class="mb-3">Priority :</h5>
+                <div class="flex gap-4 w-full">
+                  <!-- low -->
+                  <div>
+                    <input
+                      name="priority"
+                      type="radio"
+                      id="low-priority"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="low-priority"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-gray-300 py-1 px-3 font-bold text-gray-300 peer-checked:bg-gray-300 peer-checked:text-gray-700 peer-checked:border-gray-300"
+                    >
+                      Low
+                    </label>
+                  </div>
+
+                  <!-- medium -->
+                  <div>
+                    <input
+                      name="priority"
+                      type="radio"
+                      id="medium-priority"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="medium-priority"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-yellow-500 py-1 px-3 font-bold text-yellow-500 peer-checked:bg-yellow-500 peer-checked:text-gray-700 peer-checked:border-yellow-500"
+                    >
+                      Medium
+                    </label>
+                  </div>
+
+                  <!-- high -->
+                  <div>
+                    <input
+                      name="priority"
+                      type="radio"
+                      id="high-priority"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="high-priority"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-red-600 py-1 px-3 font-bold text-red-600 peer-checked:bg-red-600 peer-checked:text-gray-100 peer-checked:border-red-600"
+                    >
+                      High
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- status -->
+              <div class="flex flex-col w-full">
+                <h5 class="mb-3">Status :</h5>
+                <div class="flex gap-4 w-full">
+                  <!-- todo -->
+                  <div>
+                    <input
+                      name="status"
+                      type="radio"
+                      id="todo-status"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="todo-status"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-red-600 py-1 px-3 font-bold text-red-600 peer-checked:bg-red-600 peer-checked:text-gray-100 peer-checked:border-red-600"
+                    >
+                      Todo
+                    </label>
+                  </div>
+
+                  <!-- doing -->
+                  <div>
+                    <input
+                      name="status"
+                      type="radio"
+                      id="doing-status"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="doing-status"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-yellow-500 py-1 px-3 font-bold text-yellow-500 peer-checked:bg-yellow-500 peer-checked:text-gray-700 peer-checked:border-yellow-500"
+                    >
+                      Doing
+                    </label>
+                  </div>
+
+                  <!-- done -->
+                  <div>
+                    <input
+                      name="status"
+                      type="radio"
+                      id="done-status"
+                      class="peer hidden"
+                    />
+                    <label
+                      for="done-status"
+                      class="select-none cursor-pointer rounded-3xl border-2 border-green-800 py-1 px-3 font-bold text-green-800 peer-checked:bg-green-800 peer-checked:text-gray-100 peer-checked:border-green-800"
+                    >
+                      Done
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- details -->
+            <textarea
+              id="textarea"
+              rows="5"
+              class="w-full resize-none border border-1 border-gray-300 rounded-md mt-5 px-1 py-1 outline-1 outline-purple-700"
+              placeholder="Details (Optional)"
+            ></textarea>
+
+            <!-- cancel & save -->
+
+            <div class="flex justify-between mt-3">
+              <button
+                data-id="cancel"
+                type="button"
+                class="text-purple-500 border border-purple-500 rounded-lg w-32 h-10"
+              >
+                CANCEL
+              </button>
+              <button
+                data-id="save"
+                type="submit"
+                class="bg-purple-500 text-white rounded-lg w-32 h-10"
+              >
+                SAVE
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
