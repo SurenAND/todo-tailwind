@@ -12,3 +12,17 @@ function closeModal(item) {
 function openModal(item) {
   item.classList.remove("invisible");
 }
+
+// addModal
+const addBtn = document.getElementById("add");
+const modalBox = document.getElementById("modal-box");
+
+// close add modal
+modalBox.addEventListener("click", (e) => {
+  e.target.dataset.close ? closeModal(modalBox) : null;
+});
+
+// open add modal
+addBtn.addEventListener("click", () => {
+  openModal(modalBox);
+});
