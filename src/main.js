@@ -51,4 +51,5 @@ function addToData(target) {
     taskDeadline: deadline.value,
     taskDescription: desc.value,
   };
+  tasks.push(newTask);
 }
