@@ -43,4 +43,12 @@ function addToData(target) {
   const status = target.querySelector('input[name="status"]:checked');
   const deadline = target.querySelector('input[name="deadline"]');
   const desc = target.querySelector('textarea[name="description"]');
+  const newTask = {
+    id: Date.now(),
+    taskName: task.value,
+    taskPriority: priority.value,
+    taskStatus: status.value,
+    taskDeadline: deadline.value,
+    taskDescription: desc.value,
+  };
 }
