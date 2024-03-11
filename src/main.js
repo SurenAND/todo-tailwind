@@ -52,4 +52,9 @@ function addToData(target) {
     taskDescription: desc.value,
   };
   tasks.push(newTask);
+  addToLocalStorage(tasks);
+}
+
+function addToLocalStorage(tasks) {
+  localStorage.setItem("Tasks", JSON.stringify(tasks));
 }
