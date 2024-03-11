@@ -1,9 +1,7 @@
 // persian date picker
 jalaliDatepicker.startWatch();
-// let date = document.querySelector("input");
-// date.addEventListener("change", () => {
-//   alert(date.value);
-// });
+
+let tasks = [];
 
 // open or close modals
 function closeModal(item) {
@@ -34,6 +32,15 @@ addBtn.addEventListener("click", () => {
 const addForm = document.getElementById("form");
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  addToData(e);
+  addToData(e.target);
   closeModal(modalBox);
 });
+
+function addToData(target) {
+  // get data
+  const task = target.querySelector('input[name="task-name"]');
+  const priority = target.querySelector('input[name="priority"]:checked');
+  const status = target.querySelector('input[name="status"]:checked');
+  const deadline = target.querySelector('input[name="deadline"]');
+  const desc = target.querySelector('textarea[name="description"]');
+}
