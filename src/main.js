@@ -29,3 +29,11 @@ cancelBtn.addEventListener("click", () => closeModal(modalBox));
 addBtn.addEventListener("click", () => {
   openModal(modalBox);
 });
+
+// addModal form
+const addForm = document.getElementById("form");
+addForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addToData(e);
+  closeModal(modalBox);
+});
