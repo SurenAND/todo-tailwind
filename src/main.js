@@ -21,6 +21,9 @@ const modalBox = document.getElementById("modal-box");
 modalBox.addEventListener("click", (e) => {
   e.target.dataset.close ? closeModal(modalBox) : null;
 });
+// close with cancel btn
+const cancelBtn = document.getElementById("cancel");
+cancelBtn.addEventListener("click", () => closeModal(modalBox));
 
 // open add modal
 addBtn.addEventListener("click", () => {
