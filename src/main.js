@@ -131,6 +131,21 @@ function renderTasks() {
     taskDeadlineCol.append(deadlineSpan);
     row.append(taskDeadlineCol);
   });
+
+  // taskActions column
+  const taskActionsCol = document.createElement("td");
+  taskActionsCol.classList.add("border-l-2", "border-b-2");
+  const taskActionsSec = document.createElement("div");
+  taskActionsSec.classList.add(
+    "flex",
+    "flex-col",
+    "md:block",
+    "items-center",
+    "justify-center",
+    "p-2",
+    "gap-1"
+  );
+  taskActionsCol.append(taskActionsSec);
 }
 
 function handlePriority(priority) {
