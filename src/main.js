@@ -66,6 +66,8 @@ function getFromLocalStorage() {
     : "";
 }
 
+renderTasks();
+
 function renderTasks() {
   const tbody = document.getElementById("tbody");
   const tasksFromLS = getFromLocalStorage();
@@ -76,7 +78,13 @@ function renderTasks() {
 
     // taskName column
     const taskNameCol = document.createElement("td");
-    taskNameCol.classList.add("border-l-2", "border-b-2", "py-4", "pl-6");
+    taskNameCol.classList.add(
+      "text-start",
+      "border-l-2",
+      "border-b-2",
+      "py-4",
+      "pl-6"
+    );
     taskNameCol.innerText = `${task.taskName}`;
     row.append(taskNameCol);
 
@@ -88,7 +96,9 @@ function renderTasks() {
       "select-none",
       "rounded-3xl",
       "border-2",
-      `${handlePriority(task.taskPriority)}`,
+      `${handlePriorityBorder(task.taskPriority)}`,
+      `${handlePriorityBg(task.taskPriority)}`,
+      `${handlePriorityText(task.taskPriority)}`,
       "py-1",
       "px-3",
       "font-bold"
@@ -105,7 +115,9 @@ function renderTasks() {
       "select-none",
       "rounded-3xl",
       "border-2",
-      `${handleStatus(task.taskStatus)}`,
+      `${handleStatusBorder(task.taskStatus)}`,
+      `${handleStatusBg(task.taskStatus)}`,
+      `${handleStatusText(task.taskStatus)}`,
       "py-1",
       "px-3",
       "font-bold"
@@ -124,8 +136,7 @@ function renderTasks() {
       "border-2",
       "border-blue-400",
       "py-1",
-      "px-3",
-      "font-bold"
+      "px-3"
     );
     deadlineSpan.innerText = `${task.taskDeadline}`;
     taskDeadlineCol.append(deadlineSpan);
@@ -144,52 +155,89 @@ function renderTasks() {
       "p-2",
       "gap-1"
     );
-    taskActionsCol.append(taskActionsSec);
 
     // delete
     const deleteTask = document.createElement("button");
-    deleteTask.classList.add("bg-red-600", "px-1", "rounded", "text-center");
+    deleteTask.classList.add("bg-red-600", "mx-1", "rounded", "text-center");
     deleteTask.id = `${task.id}`;
     const deleteIcon = document.createElement("img");
     deleteIcon.src = "./assets/delete.svg";
     deleteIcon.alt = "delete";
+    deleteIcon.classList.add("w-5", "my-1", "mx-2");
     deleteTask.append(deleteIcon);
     taskActionsSec.append(deleteTask);
 
     // edit
     const editTask = document.createElement("button");
-    editTask.classList.add("bg-blue-600", "px-1", "rounded", "text-center");
+    editTask.classList.add("bg-blue-600", "mx-1", "rounded", "text-center");
     editTask.id = `${task.id}`;
     const editIcon = document.createElement("img");
     editIcon.src = "./assets/edit.svg";
     editIcon.alt = "edit";
+    editIcon.classList.add("w-5", "my-1", "mx-2");
     editTask.append(editIcon);
     taskActionsSec.append(editTask);
 
     // view
     const viewTask = document.createElement("button");
-    viewTask.classList.add("bg-blue-600", "px-1", "rounded", "text-center");
+    viewTask.classList.add("bg-gray-500", "mx-1", "rounded", "text-center");
     viewTask.id = `${task.id}`;
     const viewIcon = document.createElement("img");
     viewIcon.src = "./assets/view.svg";
     viewIcon.alt = "view";
+    viewIcon.classList.add("w-5", "my-1", "mx-2");
     viewTask.append(viewIcon);
     taskActionsSec.append(viewTask);
+
+    // append taskActionsSec
+    taskActionsCol.append(taskActionsSec);
+    row.append(taskActionsCol);
+
+    // append new row
+    tbody.append(row);
   });
 }
 
-function handlePriority(priority) {
+function handlePriorityBorder(priority) {
   return priority === "Low"
-    ? '"border-gray-300", "bg-gray-300", "text-gray-700"'
+    ? "border-gray-300"
     : priority === "Medium"
-    ? '"border-yellow-500", "bg-yellow-500", "text-gray-700"'
-    : '"border-red-600", "bg-red-600", "text-gray-100"';
+    ? "border-yellow-500"
+    : "border-red-600";
+}
+function handlePriorityBg(priority) {
+  return priority === "Low"
+    ? "bg-gray-300"
+    : priority === "Medium"
+    ? "bg-yellow-500"
+    : "bg-red-600 ";
+}
+function handlePriorityText(priority) {
+  return priority === "Low"
+    ? "text-gray-700"
+    : priority === "Medium"
+    ? "text-gray-700"
+    : "text-gray-100";
 }
 
-function handleStatus(status) {
+function handleStatusBorder(status) {
   return status === "Todo"
-    ? '"border-red-600", "bg-red-600", "text-gray-100"'
+    ? "border-red-600"
     : status === "Doing"
-    ? '"border-yellow-500", "bg-yellow-500", "text-gray-700"'
-    : '"border-green-800", "bg-green-800", "text-gray-100"';
+    ? "border-yellow-500"
+    : "border-green-800";
+}
+function handleStatusBg(status) {
+  return status === "Todo"
+    ? "bg-red-600"
+    : status === "Doing"
+    ? "bg-yellow-500"
+    : "bg-green-800";
+}
+function handleStatusText(status) {
+  return status === "Todo"
+    ? "text-gray-100"
+    : status === "Doing"
+    ? "text-gray-700"
+    : "text-gray-100";
 }
