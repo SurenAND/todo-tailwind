@@ -93,7 +93,8 @@ function renderTasks() {
       "px-3",
       "font-bold"
     );
-    taskPriorityCol.innerText = `${task.taskPriority}`;
+    prioritySpan.innerText = `${task.taskPriority}`;
+    taskPriorityCol.append(prioritySpan);
     row.append(taskPriorityCol);
   });
 }
