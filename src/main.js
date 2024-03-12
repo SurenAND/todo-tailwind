@@ -130,22 +130,32 @@ function renderTasks() {
     deadlineSpan.innerText = `${task.taskDeadline}`;
     taskDeadlineCol.append(deadlineSpan);
     row.append(taskDeadlineCol);
-  });
 
-  // taskActions column
-  const taskActionsCol = document.createElement("td");
-  taskActionsCol.classList.add("border-l-2", "border-b-2");
-  const taskActionsSec = document.createElement("div");
-  taskActionsSec.classList.add(
-    "flex",
-    "flex-col",
-    "md:block",
-    "items-center",
-    "justify-center",
-    "p-2",
-    "gap-1"
-  );
-  taskActionsCol.append(taskActionsSec);
+    // taskActions column
+    const taskActionsCol = document.createElement("td");
+    taskActionsCol.classList.add("border-l-2", "border-b-2");
+    const taskActionsSec = document.createElement("div");
+    taskActionsSec.classList.add(
+      "flex",
+      "flex-col",
+      "md:block",
+      "items-center",
+      "justify-center",
+      "p-2",
+      "gap-1"
+    );
+    taskActionsCol.append(taskActionsSec);
+
+    //
+    const deleteTask = document.createElement("button");
+    deleteTask.classList.add("bg-red-600", "px-1", "rounded", "text-center");
+    deleteTask.id = `${task.id}`;
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "./assets/delete.svg";
+    deleteIcon.alt = "delete";
+    deleteTask.append(deleteIcon);
+    taskActionsSec.append(deleteTask);
+  });
 }
 
 function handlePriority(priority) {
