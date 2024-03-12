@@ -57,10 +57,16 @@ function addToData(target) {
 
 function addToLocalStorage(tasks) {
   localStorage.setItem("Tasks", JSON.stringify(tasks));
+  renderTasks();
 }
 
 function getFromLocalStorage() {
   return localStorage.getItem("Tasks")
     ? JSON.parse(localStorage.getItem("Tasks"))
     : "";
+}
+
+function renderTasks() {
+  const tasksFromLS = getFromLocalStorage();
+  tasksFromLS.forEach((task) => {});
 }
