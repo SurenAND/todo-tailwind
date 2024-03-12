@@ -58,3 +58,9 @@ function addToData(target) {
 function addToLocalStorage(tasks) {
   localStorage.setItem("Tasks", JSON.stringify(tasks));
 }
+
+function getFromLocalStorage() {
+  return localStorage.getItem("Tasks")
+    ? JSON.parse(localStorage.getItem("Tasks"))
+    : "";
+}
