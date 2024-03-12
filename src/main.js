@@ -51,7 +51,10 @@ function addToData(target) {
     taskDeadline: deadline.value,
     taskDescription: desc.value,
   };
-  tasks = getFromLocalStorage();
+  const isNotEmpty = getFromLocalStorage();
+  if (isNotEmpty) {
+    tasks = getFromLocalStorage();
+  }
   tasks.push(newTask);
   addToLocalStorage(tasks);
 }
