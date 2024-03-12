@@ -79,5 +79,29 @@ function renderTasks() {
     taskNameCol.classList.add("border-l-2", "border-b-2", "py-4", "pl-6");
     taskNameCol.innerText = `${task.taskName}`;
     row.append(taskNameCol);
+
+    // taskPriority column
+    const taskPriorityCol = document.createElement("td");
+    taskPriorityCol.classList.add("border-l-2", "border-b-2");
+    const prioritySpan = document.createElement("span");
+    prioritySpan.classList.add(
+      "select-none",
+      "rounded-3xl",
+      "border-2",
+      `${handlePriority(task.taskPriority)}`,
+      "py-1",
+      "px-3",
+      "font-bold"
+    );
+    taskPriorityCol.innerText = `${task.taskPriority}`;
+    row.append(taskPriorityCol);
   });
+}
+
+function handlePriority(priority) {
+  return priority === "Low"
+    ? '"border-gray-300", "bg-gray-300", "text-gray-700"'
+    : priority === "Medium"
+    ? '"border-yellow-500", "bg-yellow-500", "text-gray-700"'
+    : '"border-red-600", "bg-red-600", "text-gray-100"';
 }
