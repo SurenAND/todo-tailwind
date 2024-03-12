@@ -67,6 +67,7 @@ function getFromLocalStorage() {
 }
 
 function renderTasks() {
+  const tbody = document.getElementById("tbody");
   const tasksFromLS = getFromLocalStorage();
   tasksFromLS.forEach((task) => {});
 }
