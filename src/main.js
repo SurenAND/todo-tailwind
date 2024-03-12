@@ -165,6 +165,16 @@ function renderTasks() {
     editIcon.alt = "edit";
     editTask.append(editIcon);
     taskActionsSec.append(editTask);
+
+    // view
+    const viewTask = document.createElement("button");
+    viewTask.classList.add("bg-blue-600", "px-1", "rounded", "text-center");
+    viewTask.id = `${task.id}`;
+    const viewIcon = document.createElement("img");
+    viewIcon.src = "./assets/view.svg";
+    viewIcon.alt = "view";
+    viewTask.append(viewIcon);
+    taskActionsSec.append(viewTask);
   });
 }
 
