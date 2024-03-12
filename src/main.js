@@ -69,5 +69,9 @@ function getFromLocalStorage() {
 function renderTasks() {
   const tbody = document.getElementById("tbody");
   const tasksFromLS = getFromLocalStorage();
-  tasksFromLS.forEach((task) => {});
+  tasksFromLS.forEach((task) => {
+    const row = document.createElement("tr");
+    row.id = `${task.id}`;
+    row.classList.add("text-center", "border", "h-full", "w-full");
+  });
 }
