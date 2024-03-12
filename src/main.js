@@ -73,5 +73,11 @@ function renderTasks() {
     const row = document.createElement("tr");
     row.id = `${task.id}`;
     row.classList.add("text-center", "border", "h-full", "w-full");
+
+    // taskName column
+    const taskNameCol = document.createElement("td");
+    taskNameCol.classList.add("border-l-2", "border-b-2", "py-4", "pl-6");
+    taskNameCol.innerText = `${task.taskName}`;
+    row.append(taskNameCol);
   });
 }
