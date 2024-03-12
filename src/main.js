@@ -146,7 +146,7 @@ function renderTasks() {
     );
     taskActionsCol.append(taskActionsSec);
 
-    //
+    // delete
     const deleteTask = document.createElement("button");
     deleteTask.classList.add("bg-red-600", "px-1", "rounded", "text-center");
     deleteTask.id = `${task.id}`;
@@ -155,6 +155,16 @@ function renderTasks() {
     deleteIcon.alt = "delete";
     deleteTask.append(deleteIcon);
     taskActionsSec.append(deleteTask);
+
+    // edit
+    const editTask = document.createElement("button");
+    editTask.classList.add("bg-blue-600", "px-1", "rounded", "text-center");
+    editTask.id = `${task.id}`;
+    const editIcon = document.createElement("img");
+    editIcon.src = "./assets/edit.svg";
+    editIcon.alt = "edit";
+    editTask.append(editIcon);
+    taskActionsSec.append(editTask);
   });
 }
 
