@@ -113,6 +113,23 @@ function renderTasks() {
     statusSpan.innerText = `${task.taskStatus}`;
     taskStatusCol.append(statusSpan);
     row.append(taskStatusCol);
+
+    // taskDeadline column
+    const taskDeadlineCol = document.createElement("td");
+    taskDeadlineCol.classList.add("border-l-2", "border-b-2");
+    const deadlineSpan = document.createElement("span");
+    deadlineSpan.classList.add(
+      "select-none",
+      "rounded-3xl",
+      "border-2",
+      "border-blue-400",
+      "py-1",
+      "px-3",
+      "font-bold"
+    );
+    deadlineSpan.innerText = `${task.taskDeadline}`;
+    taskDeadlineCol.append(deadlineSpan);
+    row.append(taskDeadlineCol);
   });
 }
 
