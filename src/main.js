@@ -96,6 +96,23 @@ function renderTasks() {
     prioritySpan.innerText = `${task.taskPriority}`;
     taskPriorityCol.append(prioritySpan);
     row.append(taskPriorityCol);
+
+    // taskStatus column
+    const taskStatusCol = document.createElement("td");
+    taskStatusCol.classList.add("border-l-2", "border-b-2");
+    const statusSpan = document.createElement("span");
+    statusSpan.classList.add(
+      "select-none",
+      "rounded-3xl",
+      "border-2",
+      `${handleStatus(task.taskStatus)}`,
+      "py-1",
+      "px-3",
+      "font-bold"
+    );
+    statusSpan.innerText = `${task.taskStatus}`;
+    taskStatusCol.append(statusSpan);
+    row.append(taskStatusCol);
   });
 }
 
@@ -105,4 +122,12 @@ function handlePriority(priority) {
     : priority === "Medium"
     ? '"border-yellow-500", "bg-yellow-500", "text-gray-700"'
     : '"border-red-600", "bg-red-600", "text-gray-100"';
+}
+
+function handleStatus(status) {
+  return status === "Todo"
+    ? '"border-red-600", "bg-red-600", "text-gray-100"'
+    : status === "Doing"
+    ? '"border-yellow-500", "bg-yellow-500", "text-gray-700"'
+    : '"border-green-800", "bg-green-800", "text-gray-100"';
 }
