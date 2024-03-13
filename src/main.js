@@ -2,6 +2,9 @@
 jalaliDatepicker.startWatch();
 
 let tasks = [];
+let isEdit = false;
+let editActive = false;
+let toEdit = {};
 
 // open or close modals
 function closeModal(item) {
@@ -32,7 +35,13 @@ addBtn.addEventListener("click", () => {
 const addForm = document.getElementById("form");
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  addToData(e.target);
+  if (isEdit === false) {
+    addToData(e.target);
+  } else {
+    isEdit = false;
+    editActive = true;
+    editRow(e.target);
+  }
   closeModal(modalBox);
 });
 
@@ -67,7 +76,7 @@ function addToLocalStorage(tasks) {
 function getFromLocalStorage() {
   return localStorage.getItem("Tasks")
     ? JSON.parse(localStorage.getItem("Tasks"))
-    : "";
+    : [];
 }
 
 renderTasks();
@@ -206,6 +215,11 @@ function renderTasks() {
       deleteTask.addEventListener("click", (e) => {
         confirmAndDelete(e, row);
       });
+
+      // edit
+      editTask.addEventListener("click", (e) => {
+        editRow(e, row);
+      });
     });
   }
 }
@@ -260,10 +274,43 @@ function confirmAndDelete(e, selectedRow) {
   // remove the selected section
   selectedRow.remove();
 
-  // get button id as index of the object that should removed from input array
+  // get button id as index of the object that should removed
   const idToDelete = +selectedRow.id;
   const localStorageData = getFromLocalStorage();
   const index = localStorageData.findIndex((item) => item.id === idToDelete);
   localStorageData.splice(index, 1);
   addToLocalStorage(localStorageData);
+}
+
+//Edit the selected row
+let rowToEdit;
+function editRow(e, selectedRow = {}) {
+  let localStorageData = getFromLocalStorage();
+  if (editActive === false) {
+    e.preventDefault();
+    isEdit = true;
+
+    // get button id as index of the object that should edited
+    const idToEdit = +selectedRow.id;
+    rowToEdit = localStorageData.findIndex((item) => item.id === idToEdit);
+
+    openModal(modalBox);
+  } else {
+    // get data
+    const task = e.querySelector('input[name="task-name"]');
+    const priority = e.querySelector('input[name="priority"]:checked');
+    const status = e.querySelector('input[name="status"]:checked');
+    const deadline = e.querySelector('input[name="deadline"]');
+    const desc = e.querySelector('textarea[name="description"]');
+
+    localStorageData[rowToEdit].taskName = task.value;
+    localStorageData[rowToEdit].taskPriority = priority.value;
+    localStorageData[rowToEdit].taskStatus = status.value;
+    localStorageData[rowToEdit].taskDeadline = deadline.value;
+    localStorageData[rowToEdit].taskDescription = desc.value;
+
+    editActive = false;
+    // update LocalStorage
+    addToLocalStorage(localStorageData);
+  }
 }
