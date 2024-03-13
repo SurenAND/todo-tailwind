@@ -2,12 +2,19 @@
 jalaliDatepicker.startWatch();
 
 let tasks = [];
+let isEdit = false;
+let editActive = false;
+let toEdit = {};
 
 // open or close modals
 function closeModal(item) {
+  clearInputs(addForm);
   item.classList.add("invisible");
 }
 function openModal(item) {
+  if (isEdit === false) {
+    clearInputs(addForm);
+  }
   item.classList.remove("invisible");
 }
 
@@ -32,7 +39,14 @@ addBtn.addEventListener("click", () => {
 const addForm = document.getElementById("form");
 addForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  addToData(e.target);
+  if (isEdit === false) {
+    addToData(e.target);
+  } else {
+    isEdit = false;
+    editActive = true;
+    editRow(e.target);
+  }
+
   closeModal(modalBox);
 });
 
@@ -67,7 +81,7 @@ function addToLocalStorage(tasks) {
 function getFromLocalStorage() {
   return localStorage.getItem("Tasks")
     ? JSON.parse(localStorage.getItem("Tasks"))
-    : "";
+    : [];
 }
 
 renderTasks();
@@ -206,6 +220,11 @@ function renderTasks() {
       deleteTask.addEventListener("click", (e) => {
         confirmAndDelete(e, row);
       });
+
+      // edit
+      editTask.addEventListener("click", (e) => {
+        editRow(e, row);
+      });
     });
   }
 }
@@ -260,10 +279,93 @@ function confirmAndDelete(e, selectedRow) {
   // remove the selected section
   selectedRow.remove();
 
-  // get button id as index of the object that should removed from input array
+  // get button id as index of the object that should removed
   const idToDelete = +selectedRow.id;
   const localStorageData = getFromLocalStorage();
   const index = localStorageData.findIndex((item) => item.id === idToDelete);
   localStorageData.splice(index, 1);
   addToLocalStorage(localStorageData);
+}
+
+//Edit the selected row
+let rowToEdit;
+function editRow(e, selectedRow = {}) {
+  let localStorageData = getFromLocalStorage();
+  if (editActive === false) {
+    e.preventDefault();
+    isEdit = true;
+
+    // get button id as index of the object that should edited
+    const idToEdit = +selectedRow.id;
+    rowToEdit = localStorageData.findIndex((item) => item.id === idToEdit);
+
+    preFillInputs(localStorageData[rowToEdit]);
+
+    openModal(modalBox);
+  } else {
+    // get data
+    const task = e.querySelector('input[name="task-name"]');
+    const priority = e.querySelector('input[name="priority"]:checked');
+    const status = e.querySelector('input[name="status"]:checked');
+    const deadline = e.querySelector('input[name="deadline"]');
+    const desc = e.querySelector('textarea[name="description"]');
+
+    localStorageData[rowToEdit].taskName = task.value;
+    localStorageData[rowToEdit].taskPriority = priority.value;
+    localStorageData[rowToEdit].taskStatus = status.value;
+    localStorageData[rowToEdit].taskDeadline = deadline.value;
+    localStorageData[rowToEdit].taskDescription = desc.value;
+
+    editActive = false;
+    // update LocalStorage
+    addToLocalStorage(localStorageData);
+  }
+}
+
+function preFillInputs(data) {
+  // Pre-fill the form inputs with the task's data
+  const task = data.taskName;
+  const priority = data.taskPriority;
+  const status = data.taskStatus;
+  const deadline = data.taskDeadline;
+  const desc = data.taskDescription;
+
+  // Fill the form inputs with the task's data
+  const taskInput = document.querySelector('input[name="task-name"]');
+  taskInput.value = task;
+
+  // Pre-fill the priority radio inputs
+  const priorityInputs = document.querySelectorAll('input[name="priority"]');
+  priorityInputs.forEach((input) => {
+    if (input.value === priority) {
+      input.checked = true;
+    }
+  });
+
+  // Pre-fill the status radio inputs
+  const statusInputs = document.querySelectorAll('input[name="status"]');
+  statusInputs.forEach((input) => {
+    if (input.value === status) {
+      input.checked = true;
+    }
+  });
+
+  // Fill the deadline and description inputs
+  const deadlineInput = document.querySelector('input[name="deadline"]');
+  deadlineInput.value = deadline;
+
+  const descTextarea = document.querySelector('textarea[name="description"]');
+  descTextarea.value = desc;
+}
+
+function clearInputs(form) {
+  const inputs = form.querySelectorAll("input, textarea");
+
+  inputs.forEach((input) => {
+    if (input.type !== "radio") {
+      input.value = "";
+    } else if (input.type === "radio") {
+      input.checked = false;
+    }
+  });
 }
