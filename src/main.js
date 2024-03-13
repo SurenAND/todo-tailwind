@@ -201,6 +201,11 @@ function renderTasks() {
 
       // append new row
       tbody.append(row);
+
+      // delete
+      deleteTask.addEventListener("click", (e) => {
+        confirmAndDelete(e, row);
+      });
     });
   }
 }
@@ -247,4 +252,18 @@ function handleStatusText(status) {
     : status === "Doing"
     ? "text-gray-700"
     : "text-gray-100";
+}
+
+function confirmAndDelete(e, selectedRow) {
+  e.preventDefault();
+
+  // remove the selected section
+  selectedRow.remove();
+
+  // get button id as index of the object that should removed from input array
+  const idToDelete = +selectedRow.id;
+  const localStorageData = getFromLocalStorage();
+  const index = localStorageData.findIndex((item) => item.id === idToDelete);
+  localStorageData.splice(index, 1);
+  addToLocalStorage(localStorageData);
 }
