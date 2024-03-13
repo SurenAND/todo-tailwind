@@ -374,3 +374,22 @@ function clearInputs(form) {
     }
   });
 }
+
+// view selected row
+function viewRow(e, selectedRow) {
+  e.preventDefault();
+  const viewBox = document.getElementById("view-box");
+
+  // get button id as index of the object that should show
+  const idToShow = +selectedRow.id;
+  const localStorageData = getFromLocalStorage();
+  const index = localStorageData.findIndex((item) => item.id === idToShow);
+
+  changeViewModal(localStorageData[index]);
+
+  openModal(viewBox);
+  // close add modal
+  viewBox.addEventListener("click", (e) => {
+    e.target.dataset.close ? closeModal(viewBox) : null;
+  });
+}
