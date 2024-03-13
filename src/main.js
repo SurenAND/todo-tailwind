@@ -225,6 +225,11 @@ function renderTasks() {
       editTask.addEventListener("click", (e) => {
         editRow(e, row);
       });
+
+      // view
+      viewTask.addEventListener("click", (e) => {
+        viewRow(e, row);
+      });
     });
   }
 }
