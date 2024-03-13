@@ -225,6 +225,11 @@ function renderTasks() {
       editTask.addEventListener("click", (e) => {
         editRow(e, row);
       });
+
+      // view
+      viewTask.addEventListener("click", (e) => {
+        viewRow(e, row);
+      });
     });
   }
 }
@@ -368,4 +373,41 @@ function clearInputs(form) {
       input.checked = false;
     }
   });
+}
+
+// view selected row
+function viewRow(e, selectedRow) {
+  e.preventDefault();
+  const viewBox = document.getElementById("view-box");
+
+  // get button id as index of the object that should show
+  const idToShow = +selectedRow.id;
+  const localStorageData = getFromLocalStorage();
+  const index = localStorageData.findIndex((item) => item.id === idToShow);
+
+  changeViewModal(localStorageData[index]);
+
+  openModal(viewBox);
+  // close add modal
+  viewBox.addEventListener("click", (e) => {
+    e.target.dataset.close ? closeModal(viewBox) : null;
+  });
+}
+
+function changeViewModal(data) {
+  const viewTaskName = document.getElementById("view-task-name");
+  const viewPriority = document.getElementById("view-priority");
+  const viewStatus = document.getElementById("view-status");
+  const viewDeadline = document.getElementById("view-deadline");
+  const viewDesc = document.getElementById("view-description");
+
+  viewTaskName.innerText = data.taskName;
+  viewPriority.innerText = data.taskPriority;
+  viewStatus.innerText = data.taskStatus;
+  viewDeadline.innerText = data.taskDeadline;
+  if (data.taskDescription) {
+    viewDesc.innerText = data.taskDescription;
+  } else {
+    viewDesc.innerText = "No Detail or Description";
+  }
 }

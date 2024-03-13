@@ -784,6 +784,10 @@ video {
   gap: 1.25rem;
 }
 
+.gap-10{
+  gap: 2.5rem;
+}
+
 .overflow-auto{
   overflow: auto;
 }
@@ -894,6 +898,11 @@ video {
 .border-yellow-500{
   --tw-border-opacity: 1;
   border-color: rgb(234 179 8 / var(--tw-border-opacity));
+}
+
+.border-purple-400{
+  --tw-border-opacity: 1;
+  border-color: rgb(192 132 252 / var(--tw-border-opacity));
 }
 
 .bg-black{
@@ -1052,6 +1061,11 @@ video {
 .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-black{
