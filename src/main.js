@@ -254,52 +254,16 @@ function handleStatusText(status) {
     : "text-gray-100";
 }
 
-// confirm Delete
 function confirmAndDelete(e, selectedRow) {
   e.preventDefault();
 
-  // pop up modal
-  const deleteConfirmSec = document.getElementById("delete-section");
-  closeModal(deleteConfirmSec);
+  // remove the selected section
+  selectedRow.remove();
 
-  const deleteBtn = document.getElementById("delete-content-delete");
-
-  // Remove the previous event listener from the delete button
-  deleteBtn.removeEventListener("click", handleDeleteClick);
-
-  // Add the new event listener to the delete button
-  deleteBtn.addEventListener("click", handleDeleteClick);
-
-  let deletedItem;
-
-  function handleDeleteClick() {
-    closeModal(deleteConfirmSec);
-    const idToDelete = selectedRow.id;
-    const localStorageData = getFromLocalStorage();
-    const index = localStorageData.findIndex((item) => item.id === +idToDelete);
-
-    deletedItem = localStorageData.splice(index, 1);
-
-    selectedRow.classList.add("hidden");
-
-    // Remove the event listener after it's been executed
-    deleteBtn.removeEventListener("click", handleDeleteClick);
-
-    // Show the undo message
-    showUndoMessage(selectedRow, deletedItem);
-  }
-
-  // cancel button
-  const cancelBtn = document.getElementById("delete-content-cancel");
-  cancelBtn.addEventListener("click", () => {
-    closeModal(deleteConfirmSec);
-    deleteBtn.removeEventListener("click", handleDeleteClick);
-  });
-
-  window.addEventListener("click", (event) => {
-    if (event.target === deleteConfirmSec) {
-      closeModal(deleteConfirmSec);
-      deleteBtn.removeEventListener("click", handleDeleteClick);
-    }
-  });
+  // get button id as index of the object that should removed from input array
+  const idToDelete = +selectedRow.id;
+  const localStorageData = getFromLocalStorage();
+  const index = localStorageData.findIndex((item) => item.id === idToDelete);
+  localStorageData.splice(index, 1);
+  addToLocalStorage(localStorageData);
 }
