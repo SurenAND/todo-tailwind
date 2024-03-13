@@ -393,3 +393,21 @@ function viewRow(e, selectedRow) {
     e.target.dataset.close ? closeModal(viewBox) : null;
   });
 }
+
+function changeViewModal(data) {
+  const viewTaskName = document.getElementById("view-task-name");
+  const viewPriority = document.getElementById("view-priority");
+  const viewStatus = document.getElementById("view-status");
+  const viewDeadline = document.getElementById("view-deadline");
+  const viewDesc = document.getElementById("view-description");
+
+  viewTaskName.innerText = data.taskName;
+  viewPriority.innerText = data.taskPriority;
+  viewStatus.innerText = data.taskStatus;
+  viewDeadline.innerText = data.taskDeadline;
+  if (data.taskDescription) {
+    viewDesc.innerText = data.taskDescription;
+  } else {
+    viewDesc.innerText = "No Detail or Description";
+  }
+}
