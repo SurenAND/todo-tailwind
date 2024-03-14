@@ -411,3 +411,33 @@ function changeViewModal(data) {
     viewDesc.innerText = "No Detail or Description";
   }
 }
+
+// dropDown Btn and pagination
+const dropdowns = document.getElementById("dropdown");
+const chevron = document.getElementById("chevron-down");
+const select = document.getElementById("select");
+const selected = document.getElementById("selected");
+const menu = document.getElementById("menu");
+const options = document.querySelectorAll("#menu li");
+
+select.addEventListener("click", () => {
+  chevron.classList.toggle("rotate-180");
+  menu.classList.toggle("hidden");
+});
+
+window.addEventListener("mouseup", function (event) {
+  if (event.target != select && event.target.parentNode != select) {
+    select.classList.remove("select-clicked");
+    chevron.classList.remove("rotate-180");
+    menu.classList.add("hidden");
+  }
+});
+
+options.forEach((option) => {
+  option.addEventListener("click", (event) => {
+    selected.textContent = option.textContent;
+    select.classList.remove("select-clicked");
+    chevron.classList.remove("rotate-180");
+    menu.classList.add("hidden");
+  });
+});
