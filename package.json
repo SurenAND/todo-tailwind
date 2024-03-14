@@ -1,0 +1,15 @@
+{
+  "name": "todo-tailwind",
+  "version": "1.0.0",
+  "description": "This is a Todo App project with [`Tailwindcss`](https://tailwindcss.com/).",
+  "main": "index.js",
+  "scripts": {
+    "sync-css": "npx tailwindcss -i ./src/tailwind.css -o ./src/style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
