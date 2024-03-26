@@ -281,15 +281,43 @@ function handleStatusText(status) {
 function confirmAndDelete(e, selectedRow) {
   e.preventDefault();
 
-  // remove the selected section
-  selectedRow.remove();
+  const deleteConfirmSec = document.getElementById("delete-section");
+  openModal(deleteConfirmSec);
 
-  // get button id as index of the object that should removed
-  const idToDelete = +selectedRow.id;
-  const localStorageData = getFromLocalStorage();
-  const index = localStorageData.findIndex((item) => item.id === idToDelete);
-  localStorageData.splice(index, 1);
-  addToLocalStorage(localStorageData);
+  const deleteBtn = document.getElementById("delete-content-delete");
+
+  // Remove the previous event listener from the delete button
+  deleteBtn.removeEventListener("click", handleDeleteClick);
+
+  // Add the new event listener to the delete button
+  deleteBtn.addEventListener("click", handleDeleteClick);
+
+  function handleDeleteClick() {
+    closeModal(deleteConfirmSec);
+    // remove the selected section
+    selectedRow.remove();
+
+    // get button id as index of the object that should removed
+    const idToDelete = +selectedRow.id;
+    const localStorageData = getFromLocalStorage();
+    const index = localStorageData.findIndex((item) => item.id === idToDelete);
+    localStorageData.splice(index, 1);
+    addToLocalStorage(localStorageData);
+  }
+
+  // cancel button
+  const cancelBtn = document.getElementById("delete-content-cancel");
+  cancelBtn.addEventListener("click", () => {
+    closeModal(deleteConfirmSec);
+    deleteBtn.removeEventListener("click", handleDeleteClick);
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === deleteConfirmSec) {
+      closeModal(deleteConfirmSec);
+      deleteBtn.removeEventListener("click", handleDeleteClick);
+    }
+  });
 }
 
 //Edit the selected row
